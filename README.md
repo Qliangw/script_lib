@@ -4,7 +4,15 @@ script_lib 是一个多功能的脚本库，提供各种实用脚本以应对不
 
 ## 特点
 
-- 自动备份gitlab(docker)
+- gitlab
+  - [x] 自动备份gitlab(docker)
+  - [ ] 自动清理x天前的文件
+  - [ ] 恢复功能
+
+> **TODO(已经在用，暂未整理)**
+> - syno(群晖)
+> - clash(linux更新订阅)
+> - kernel -> source insight
 
 ## 入门指南
 
@@ -12,16 +20,13 @@ script_lib 是一个多功能的脚本库，提供各种实用脚本以应对不
 
 1. 克隆仓库：`git clone https://github.com/Qliangw/script_lib.git`
 2. 浏览仓库中的脚本文件。
-3. 选择最适合您需求的脚本（们）。
+3. 选择最适合您需求的脚本。
 4. 自定义并将脚本集成到您的工作流程中。
 
 ## 使用方法
 
 请参阅各个脚本文件的使用说明和文档。
 
-## 贡献
-
-欢迎为 script_lib 做出贡献！如果您有任何有用的脚本或改进意见，请随时提交拉取请求。
 
 ## 许可证
 
@@ -29,5 +34,5 @@ script_lib 是一个多功能的脚本库，提供各种实用脚本以应对不
 
 ## 联系方式
 
-如有任何问题或反馈，请在 [GitHub 仓库](https://github.com/Qliangw/script_lib) 上提交问题。
+如有任何问题或反馈，请在 [GitHub 仓库](https://github.com/Qliangw/script_lib/issues) 上提交问题。
 
