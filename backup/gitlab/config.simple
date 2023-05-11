@@ -1,0 +1,5 @@
+# 备份目录和容器名称
+backup_dir="/path/to/your/backup"
+container_dir="/path/to/your/docker/gitlab"
+container_name="your-docker-gitlab-name"
+docker_user="root"
