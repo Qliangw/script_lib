@@ -21,6 +21,20 @@ log_file="$backup_dir/log/logs_$current_date.txt"
 
 echo -e $tinfo "script path: $path"
 
+bak_data_dir="$backup_dir/backups/data"
+bak_conf_dir="$backup_dir/backups/config"
+
+if [ ! -d "$bak_data_dir" ]; then
+    # 目标目录不存在，创建目录
+    mkdir -p "$bak_data_dir"
+fi
+
+if [ ! -d "$bak_conf_dir" ]; then
+    # 目标目录不存在，创建目录
+    mkdir -p "$bak_conf_dir"
+fi
+
+
 check_backup_need() {
     
     echo -e $tinfo "Check backup status"
@@ -40,17 +54,18 @@ check_backup_need() {
 }
 
 
+
 # 备份函数
 backup() {
     
     # 创建数据备份
     echo -e $tinfo "Creating data backup..." | tee -a $log_file
     docker exec $container_name gitlab-backup create | tee -a $log_file
-
+	
     # 将数据备份文件复制到临时目录
     #docker cp $container_name:/var/opt/gitlab/backups/$backup_file /tmp/gitlab_tmp/$backup_file
     cd $container_dir/data/backups 
-    cp $(ls -t | head -n1) $backup_dir/backups
+    cp $(ls -t | head -n1) $backup_dir/backups/data
 
     # 创建配置备份
     echo -e $tinfo "Creating config backup..." | tee -a $log_file
@@ -58,7 +73,7 @@ backup() {
 
     # 将配置备份文件复制到临时目录
     cd $container_dir/config/config_backup
-    cp $(ls -t | head -n1) $backup_dir/backups
+    cp $(ls -t | head -n1) $backup_dir/backups/config
 
     # 使用指定用户将备份文件复制到指定的备份目录
     # echo -e $tinfo "Copying backup files to $backup_dir..."
@@ -93,7 +108,7 @@ restore() {
     backup_file=$1
 
     # 将数据备份文件复制到容器
-		echo "TODO" | tee -a $log_file
+    echo "TODO" | tee -a $log_file
     echo "Restoring data backup..." | tee -a $log_file
     #docker cp $backup_dir/$backup_file $container_name:/var/opt/gitlab/backups/$backup_file
 
@@ -123,7 +138,7 @@ show_version() {
 
 # 主要脚本逻辑
 if [ "$1" = "backup" ]; then
-		check_backup_need
+    check_backup_need
     backup
     echo -e $tinfo "GitLab 实例备份完成." | tee -a $log_file
 elif [ "$1" = "restore" ]; then
